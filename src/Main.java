@@ -55,19 +55,24 @@ public class Main {
                 )
         );
         List<Product> es1 = products.stream()
-                .filter(product -> product.category.equals("books") && product.price > 100).toList();
+                .filter(product -> product.category.equals("books") && product.price > 100)
+                .toList();
 
         List<Order> es2 = orders.stream()
-                .filter(order -> order.products.stream().anyMatch(product -> product.category.equals("baby"))).toList();
+                .filter(order -> order.products.stream()
+                        .anyMatch(product -> product.category.equals("baby")))
+                .toList();
 
         List<Product> es3 = products.stream()
                 .filter(product -> product.category.equals("Boys"))
-                .map(product -> new Product(product.id, product.name, product.category, product.price * 0.9)).toList();
+                .map(product -> new Product(product.id, product.name, product.category, product.price * 0.9))
+                .toList();
 
         List<Product> es4 = orders.stream()
-                .filter(order -> order.customer.tier==2&&
-                        order.orderDate.isAfter(LocalDate.of(2021,2,1))&&
-                                order.orderDate.isBefore(LocalDate.of(2021,4,1))
-                        ).flatMap(order -> order.products.stream()).toList();
+                .filter(order -> order.customer.tier == 2 &&
+                        order.orderDate.isAfter(LocalDate.of(2021, 2, 1)) &&
+                        order.orderDate.isBefore(LocalDate.of(2021, 4, 1)))
+                .flatMap(order -> order.products.stream())
+                .toList();
     }
 }
